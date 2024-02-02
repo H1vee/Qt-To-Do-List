@@ -14,19 +14,18 @@ class AddTask : public QDialog
 public:
     explicit AddTask(QWidget *parent = nullptr);
     ~AddTask();
+public slots:
     QString getTaskName();
     QString getTaskDescription();
-    QDate getDeadLine();
-public slots:
+    QDate   getDeadLine();
 
+signals:
+    void taskAdded(const QString &TaskName,const QString &TaskDescription,const QDate &DeadLine);
 private slots:
     void OKButtonClick();
 private:
     Ui::AddTask *ui;
 
-
-    bool checkName(QString Name);
-    bool checkTaskDescription(QString Description);
 
 };
 

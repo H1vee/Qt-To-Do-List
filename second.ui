@@ -15,21 +15,25 @@
   </property>
   <property name="styleSheet">
    <string notr="true">QDialog{
-background-color:#F6ECE7;
+background-color:#595959;
 }</string>
   </property>
   <widget class="QListWidget" name="ToDolistWidget">
    <property name="geometry">
     <rect>
      <x>0</x>
-     <y>170</y>
+     <y>120</y>
      <width>231</width>
      <height>281</height>
     </rect>
    </property>
    <property name="styleSheet">
     <string notr="true">QListWidget{
-background-color:#EBF9F9;
+background-color:#FFFFE2;
+border-radius:50%;
+}
+QListWidget::item:focus{
+outline:none;
 }</string>
    </property>
   </widget>
@@ -37,7 +41,7 @@ background-color:#EBF9F9;
    <property name="geometry">
     <rect>
      <x>250</x>
-     <y>140</y>
+     <y>80</y>
      <width>141</width>
      <height>31</height>
     </rect>
@@ -45,7 +49,7 @@ background-color:#EBF9F9;
    <property name="styleSheet">
     <string notr="true">QLabel{
 font-family:&quot;Lucida Console&quot;, &quot;Courier New&quot;, monospace;
-color:#DB8BF5;
+color:#7083E0;
 }</string>
    </property>
    <property name="text">
@@ -55,15 +59,15 @@ color:#DB8BF5;
   <widget class="QLabel" name="label_2">
    <property name="geometry">
     <rect>
-     <x>0</x>
-     <y>140</y>
+     <x>80</x>
+     <y>80</y>
      <width>141</width>
      <height>31</height>
     </rect>
    </property>
    <property name="styleSheet">
     <string notr="true">QLabel{
-color:#DB8BF5;
+color:#7083E0;
 font-family:&quot;Lucida Console&quot;, &quot;Courier New&quot;, monospace;
 }</string>
    </property>
@@ -86,27 +90,46 @@ font-family:&quot;Lucida Console&quot;, &quot;Courier New&quot;, monospace;
 text-align: center;
 border:1px solid;
 color: black;
-background-color:#F5BCCD;
+background-color:#969696;
 }
 
 QPushButton:hover{
-background-color:#DB8BF5;
+background-color:#D4D4D4;
 }</string>
    </property>
    <property name="text">
     <string>Exit</string>
    </property>
   </widget>
-  <widget class="QWidget" name="">
+  <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
-     <x>280</x>
-     <y>170</y>
-     <width>71</width>
-     <height>71</height>
+     <x>270</x>
+     <y>110</y>
+     <width>111</width>
+     <height>131</height>
     </rect>
    </property>
    <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
+     <widget class="QPushButton" name="AddPushButton">
+      <property name="styleSheet">
+       <string notr="true">QPushButton{
+border:none;
+color:#318C99;
+font-family:&quot;Lucida Console&quot;, &quot;Courier New&quot;, monospace;
+font-size:20px;
+}
+QPushButton::hover{
+text-decoration:underline;
+color:#010203;
+}</string>
+      </property>
+      <property name="text">
+       <string>Add</string>
+      </property>
+     </widget>
+    </item>
     <item>
      <widget class="QPushButton" name="EditPushButton">
       <property name="enabled">
@@ -115,9 +138,11 @@ background-color:#DB8BF5;
       <property name="styleSheet">
        <string notr="true">QPushButton{
 border:none;
-color:#A85B7A;
-font-family: Arial, Helvetica, sans-serif;
+color:#318C99;
+font-size:20px;
+font-family:&quot;Lucida Console&quot;, &quot;Courier New&quot;, monospace;
 text-align: center;
+
 }
 
 QPushButton::hover{
@@ -131,25 +156,6 @@ color:#010203;
      </widget>
     </item>
     <item>
-     <widget class="QPushButton" name="AddPushButton">
-      <property name="styleSheet">
-       <string notr="true">QPushButton{
-border:none;
-color:#318C99;
-font-family: Arial, Helvetica, sans-serif;
-text-align:center
-}
-QPushButton::hover{
-text-decoration:underline;
-color:#010203;
-}</string>
-      </property>
-      <property name="text">
-       <string>Add</string>
-      </property>
-     </widget>
-    </item>
-    <item>
      <widget class="QPushButton" name="DeletePushButton">
       <property name="enabled">
        <bool>true</bool>
@@ -157,9 +163,11 @@ color:#010203;
       <property name="styleSheet">
        <string notr="true">QPushButton{
 border:none;
-color:#444A99;
-font-family: Arial, Helvetica, sans-serif;
+color:#318C99;
+font-family:&quot;Lucida Console&quot;, &quot;Courier New&quot;, monospace;
 text-align: center;
+font-size:20px;
+
 }
 
 QPushButton::hover{
@@ -173,6 +181,101 @@ color:#010203;
      </widget>
     </item>
    </layout>
+  </widget>
+  <widget class="QListWidget" name="InfoListWidget">
+   <property name="geometry">
+    <rect>
+     <x>170</x>
+     <y>340</y>
+     <width>201</width>
+     <height>141</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QListWidget{
+background-color:#FFFFE2;
+border-radius:50%;
+}
+QListWidget::item:focus{
+outline:none;
+}</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="TaskDescriptionLabel">
+   <property name="geometry">
+    <rect>
+     <x>190</x>
+     <y>360</y>
+     <width>131</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QLabel{
+color:#7083E0;
+font-family:&quot;Lucida Console&quot;, &quot;Courier New&quot;, monospace;
+}</string>
+   </property>
+   <property name="text">
+    <string>Task Description:</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="DeadLineLabel">
+   <property name="geometry">
+    <rect>
+     <x>188</x>
+     <y>450</y>
+     <width>81</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QLabel{
+color:#7083E0;
+font-family:&quot;Lucida Console&quot;, &quot;Courier New&quot;, monospace;
+}</string>
+   </property>
+   <property name="text">
+    <string>DeadLine:</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="InfoDeadLineLabel">
+   <property name="geometry">
+    <rect>
+     <x>260</x>
+     <y>450</y>
+     <width>111</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QLabel{
+color:#7083E0;
+font-family:&quot;Lucida Console&quot;, &quot;Courier New&quot;, monospace;
+}</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="InfoTaskDescriptionLabel">
+   <property name="geometry">
+    <rect>
+     <x>190</x>
+     <y>360</y>
+     <width>161</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QLabel{
+color:#7083E0;
+font-family:&quot;Lucida Console&quot;, &quot;Courier New&quot;, monospace;
+}</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
   </widget>
  </widget>
  <resources/>

@@ -87,7 +87,6 @@ color:#DDDAD9;
       <string notr="true">QLineEdit{
 border:none;
 background-color:#DDDAD9;
-
 }</string>
      </property>
     </widget>

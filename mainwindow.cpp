@@ -31,7 +31,9 @@ bool MainWindow::AuthorisationCheckButtonClick(){
     if(login=="admin"&&password=="admin123"){
         messageBox.information(this,"Authorisation successful","Authorisation has been successful");
         emit AuthorisationSuccessful();
+        this->close();
         return true;
+
     }else{
         messageBox.critical(this,"Authorisation failed","Authorisation has been failed");
     }
@@ -43,6 +45,7 @@ void MainWindow::ShowPasswordCheckBoxClick(bool checked){
     }else{
         ui->PasswordEdit->setEchoMode(QLineEdit::Password);
     }
+
 }
 
 
