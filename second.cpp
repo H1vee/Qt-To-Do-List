@@ -22,7 +22,7 @@ second::second(QWidget *parent)
     connect(ui->ToDolistWidget, &QListWidget::itemClicked, this, &second::UpdateInfoListWidget);
     connect(Task,&AddTask::taskAdded,this,&second::AddTaskToListWidget);
     connect(ui->DeletePushButton,&QPushButton::clicked,this,&second::DeleteTaskListWidget);
-
+    connect(this,&second::TaskDeleted,Task,&AddTask::deleteTask);
 }
 
 second::~second()
@@ -57,38 +57,41 @@ std::map<QString,TaskInfo>taskInfoMap;
 
 void second::AddTaskToListWidget(const QString&TaskName,const QString &TaskDescription,const QDate &DeadLine){
     QListWidgetItem *newItem = new QListWidgetItem(TaskName);
-     QFont font("Times New Roman",15);
-     newItem->setFont(font);
-     newItem->setTextAlignment(Qt::AlignCenter);
-     newItem->setData(Qt::ForegroundRole,QBrush(Qt::lightGray));
-     ui->ToDolistWidget->setSelectionMode(QAbstractItemView::NoSelection);
-     ui->ToDolistWidget->addItem(newItem);
-     // ui->InfoDeadLineLabel->setText(DeadLine.toString("dd-MM-yyyy"));
-     // ui->InfoTaskDescriptionLabel->setText(TaskDescription);
-     // ui->InfoTaskNameLabel->setText(TaskName);
-     taskInfoMap[TaskName]={TaskDescription,DeadLine};
+    QFont font("Times New Roman",15);
+    newItem->setFont(font);
+    newItem->setTextAlignment(Qt::AlignCenter);
+    newItem->setData(Qt::ForegroundRole,QBrush(Qt::lightGray));
+    ui->ToDolistWidget->setSelectionMode(QAbstractItemView::NoSelection);
+    ui->ToDolistWidget->addItem(newItem);
+    // ui->InfoDeadLineLabel->setText(DeadLine.toString("dd-MM-yyyy"));
+    // ui->InfoTaskDescriptionLabel->setText(TaskDescription);
+    // ui->InfoTaskNameLabel->setText(TaskName);
+    taskInfoMap[TaskName]={TaskDescription,DeadLine};
 
 }
 
 void second::DeleteTaskListWidget(){
 
     QListWidgetItem *item = ui->ToDolistWidget->currentItem();
-
-    ui->InfoTaskDescriptionLabel->clear();
-    ui->InfoDeadLineLabel->clear();
-
-    delete item;
-    DefaultSelection();
+    if(item){
+        QString TaskName = item->text();
+        ui->InfoTaskDescriptionLabel->clear();
+        ui->InfoDeadLineLabel->clear();
+        taskInfoMap.erase(TaskName);
+        emit TaskDeleted(TaskName);
+        delete item;
+        DefaultSelection();
+    }
 }
 
 void second::AddedTaskViewSelectItem(){
-        ui->EditPushButton->setVisible(true);
-        ui->DeletePushButton->setVisible(true);
-        ui->InfoDeadLineLabel->setVisible(true);
-        ui->InfoTaskDescriptionLabel->setVisible(true);
-        ui->InfoListWidget->setVisible(true);
-        ui->TaskDescriptionLabel->setVisible(true);
-        ui->DeadLineLabel->setVisible(true);
+    ui->EditPushButton->setVisible(true);
+    ui->DeletePushButton->setVisible(true);
+    ui->InfoDeadLineLabel->setVisible(true);
+    ui->InfoTaskDescriptionLabel->setVisible(true);
+    ui->InfoListWidget->setVisible(true);
+    ui->TaskDescriptionLabel->setVisible(true);
+    ui->DeadLineLabel->setVisible(true);
 
 }
 void second::UpdateInfoListWidget(QListWidgetItem *item){
@@ -125,4 +128,3 @@ bool second::eventFilter(QObject *obj,QEvent *event){
     return QObject::eventFilter(obj,event);
 
 }
-

@@ -16,7 +16,8 @@ public:
     explicit second(QWidget *parent = nullptr);
     ~second();
 
-
+signals:
+    void TaskDeleted(const QString &TaskName);
 
 public slots:
     void openWindow();

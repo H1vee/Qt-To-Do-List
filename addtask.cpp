@@ -6,12 +6,15 @@ AddTask::AddTask(QWidget *parent)
     , ui(new Ui::AddTask)
 {
     ui->setupUi(this);
+
     connect(ui->OKPushButton,&QPushButton::clicked,this,&AddTask::OKButtonClick);
+
 }
 
 AddTask::~AddTask()
 {
     delete ui;
+
 }
 
 
@@ -27,8 +30,18 @@ QDate AddTask::getDeadLine(){
     return ui->DeadLineEdit->date();
 }
 
+void AddTask::AddTaskToMap(const QString &TaskName,const QString &TaskDescription,const QDate& DeadLine){
+    TaskInfoForCheck check;
+    check.TaskDesc=TaskDescription;
+    check.deadLine=DeadLine;
+    TaskMap[TaskName]=check;
+}
 
-
+void AddTask::deleteTask(const QString &TaskName){
+    if(TaskMap.find(TaskName)!=TaskMap.end()){
+        TaskMap.erase(TaskName);
+    }
+}
 
 void AddTask::OKButtonClick(){
     QMessageBox messageBox;
@@ -65,7 +78,19 @@ void AddTask::OKButtonClick(){
         return;
     }
 
-    emit taskAdded(getTaskName(),getTaskDescription(),getDeadLine());
+    QString TaskName = getTaskName();
+    if(TaskMap.find(TaskName)!=TaskMap.end()){
+        messageBox.setIcon(QMessageBox::Warning);
+        messageBox.setWindowTitle("Dublicate Task");
+        messageBox.setText("Таке завдання вже існує.");
+        ui->TaskDescriptionEdit->setFocus();
+        messageBox.exec();
+
+        return;
+    }
+
+    AddTaskToMap(TaskName,getTaskDescription(),getDeadLine());
+    emit taskAdded(TaskName,getTaskDescription(),getDeadLine());
 
     ui->TaskNameEdit->clear();
     ui->TaskDescriptionEdit->clear();
@@ -73,5 +98,3 @@ void AddTask::OKButtonClick(){
 
     accept();
 }
-
-
